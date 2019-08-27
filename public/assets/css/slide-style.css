@@ -1,0 +1,182 @@
+#body .slide_menu{
+    height: 80vh;
+}
+
+#col-slide .slide{
+    height: 200px;
+}
+
+.slide-full-width{
+    background: #eeeeee;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+
+.btn-slide-style{
+    padding: 10px 15px;
+    position: absolute;
+    background: rgba(1,1,1,0.2);
+    top: 50%;
+    transform: translate(0,-50%);
+    transition: all linear 0.3s;
+    z-index: 1001;
+    border-radius: 25px;
+}
+
+.btn-next{
+    right: -50px;
+}
+
+.btn-prev{
+    left: -50px;
+}
+
+.slide-full-width:hover .btn-next{
+    right: 20%;
+} 
+
+.slide-full-width:hover .btn-prev{
+    left: 20%;
+}
+
+.btn-slide-style:hover{
+    background: rgba(1,1,1,0.5);
+    color: white;
+    cursor: pointer;
+}
+
+.slide-box{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation-name: animate-style;
+    animation-duration: 1s;
+}
+
+@keyframes animate-style{
+    from{ opacity: 0;}
+    to{opacity: 1;}
+}
+
+.slide-box img{
+    width: 100%;
+    height: 100%;
+}
+
+.slide-box .titles{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(5, 126, 240, 0.534);
+    padding: 10px 20px;
+    color: white;
+}
+
+.slide-box .category{
+    position: absolute;
+    top: 5%;
+    left: 0;
+    width: auto;
+    background: rgba(5, 126, 240, 0.534);
+    padding: 10px 20px;
+    color: white;
+}
+
+.slide-full-width .menu{
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 5%;
+    right: 0;
+    z-index: 200;
+}
+
+.slide-full-width .menu ul{
+    color: white;
+    width: 100%;
+    list-style: none;
+    background: rgba(0, 51, 102, 0.63);    
+}
+
+.slide-full-width .menu ul > li{
+    display: inline-block;
+    position: relative;
+}
+
+.slide-full-width .menu ul > li > a{
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    padding: 10px 10px;
+}
+
+.slide-full-width .menu ul > li > a:hover{
+    background: darkcyan;;
+    color: white;
+    border-left: 1px solid red;
+}
+
+.slide-full-width .menu ul > li:hover a{
+    background: darkcyan;
+    border-left: 1px solid red;
+
+}
+
+.slide-full-width .menu ul > li:hover ul.sub-menu{
+    display: block;
+}
+
+.slide-full-width ul.sub-menu{
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 0;
+    background: darkcyan;
+    list-style: none;
+    /* border-left: 1px solid red; */
+}
+
+.slide-full-width ul.sub-menu li{
+    display: block;
+} 
+
+.slide-full-width ul.sub-menu li a{
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 5px 10px;
+}
+
+.slide-full-width ul.sub-menu li a:hover{
+    background: lightcoral;
+    border-right: 1px solid yellow;
+}
+
+.slide-box .slide-link{
+    position: absolute;
+    overflow: hidden;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0c0c0c6e;
+    z-index: 100;
+}
+
+.slide-box:hover>.slide-link{
+    display: inline;
+    cursor: pointer;
+}
+
+.btn-link{
+    margin-left: 50%;
+    margin-top: 25%;
+    transform: translate(-50%,0);
+    text-decoration-style: none;
+    /* margin-top: 50%; */
+}

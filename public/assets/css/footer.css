@@ -1,0 +1,10 @@
+#footer {
+    padding: 10px; 
+    margin: 0;
+}
+
+#footer .footer{
+    width: 100%;
+    text-align: center;
+    padding: 10px 10px;
+}

@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#header .container-fluid{
+    padding: 10px 0;
+}
+
+#header .logo{
+    height: 125px;
+}
+
+#header .ads{
+    height: 125px;
+}
+
+#header .logo img{
+    max-width: 100%;
+    height: 90%;
+    margin-top: 2.5%;
+}
+
+#header .ads img{
+    max-width: 100%;
+    height: 100%;
+    float: right;
+}
+

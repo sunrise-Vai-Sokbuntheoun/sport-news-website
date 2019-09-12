@@ -1,328 +1,98 @@
 <?php
 include 'config.php';
-include 'public/template/my-template.php';
-include 'public/assets/php-reference/transactions.php';
+include 'public/php-reference/functions.php';
+include 'resource/db-functions/transaction-db.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <?php
-    //link library
-    echo link_font();
-    echo lib_script("");
-    echo lib_css("");
-    ?>
-    <link rel="stylesheet" href="public/assets/css/custom-style1.css">
-    <link rel="stylesheet" href="public/assets/css/slide-style.css">
-    <link rel="stylesheet" href="public/assets/css/footer.css">
-    <!-- <link rel="stylesheet" href="public/assets/css/card-pages.css"> -->
-    <link rel="stylesheet" href="public/assets/css/content-card.css">
-    <link rel="stylesheet" href="public/assets/css/content-pages.css">
-    <script src="public/assets/script/slide-style.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sport News | <?php echo date('M-d-y') ?></title>
-</head>
-
-<body>
-    <section id="header">
-        <div class="container-fluid bg-warning">
-            <div class="container">
+<?php include 'public/template/p-header.php'; ?>
+    <div class="site-main-container">
+        <!-- Start top-post Area -->
+        <?php get_public_topPostArea(); ?>
+        <!-- End top-post Area -->
+        <!-- Start latest-post Area -->
+        <section class="latest-post-area pb-120">
+            <div class="container no-padding">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <div class="logo">
-                            <a href="#"><img src="public/assets/images/logos/logo200x200.png" alt=""></a>
+                    <div class="col-lg-8 post-list">
+                        <!-- Start latest-post Area -->
+                        <?php get_public_latestPost(); ?>
+                        <!-- End latest-post Area -->
+
+                        <!-- Start banner-ads Area -->
+                        <div class="col-lg-12 ad-widget-wrap mt-30 mb-30">
+                            <img class="img-fluid" src="img/banner-ad.jpg" alt="">
                         </div>
+                        <!-- End banner-ads Area -->
                     </div>
-                    <div class="col-lg-9">
-                        <div class="ads">
-                            <a href="#"><img src="public/assets/images/banner-sponser/ads.gif" alt=""></a>
+                    <div class="col-lg-4">
+                        <div class="sidebars-area">
+                            <div class="single-sidebar-widget ads-widget">
+                                <img class="img-fluid" src="img/sidebar-ads.jpg" alt="">
+                            </div>
+                            <div class="single-sidebar-widget newsletter-widget">
+                                <h6 class="title">Newsletter</h6>
+                                <p>
+                                    Here, I focus on a range of items
+                                    andfeatures that we use in life without
+                                    giving them a second thought.
+                                </p>
+                                <div class="form-group d-flex flex-row">
+                                    <div class="col-autos">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="Email Address"
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = 'Email Address'" type="text">
+                                        </div>
+                                    </div>
+                                    <a href="#" class="bbtns">Subcribe</a>
+                                </div>
+                                <p>
+                                    You can unsubscribe us at any time
+                                </p>
+                            </div>
+                            <div class="single-sidebar-widget most-popular-widget">
+                                <h6 class="title">Most Popular</h6>
+                                <!-- Right-site-Most-popular -->
+                                <?php get_public_rightSitePopular(); ?>
+                                <!-- End Right-site-Most-popular -->
+                            </div>
+                            <div class="single-sidebar-widget social-network-widget">
+                                <h6 class="title">Social Networks</h6>
+                                <ul class="social-list">
+                                    <li class="d-flex justify-content-between align-items-center fb">
+                                        <div class="icons d-flex flex-row align-items-center">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                            <p>983 Likes</p>
+                                        </div>
+                                        <a href="#">Like our page</a>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center tw">
+                                        <div class="icons d-flex flex-row align-items-center">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            <p>983 Followers</p>
+                                        </div>
+                                        <a href="#">Follow Us</a>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center yt">
+                                        <div class="icons d-flex flex-row align-items-center">
+                                            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                            <p>983 Subscriber</p>
+                                        </div>
+                                        <a href="#">Subscribe</a>
+                                    </li>
+                                    <li class="d-flex justify-content-between align-items-center rs">
+                                        <div class="icons d-flex flex-row align-items-center">
+                                            <i class="fa fa-rss" aria-hidden="true"></i>
+                                            <p>983 Subscribe</p>
+                                        </div>
+                                        <a href="#">Subscribe</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="top-menu">
-
-    </section>
-    <section id="body">
-        <div class="slide_menu">
-            <div class="slide-full-width">
-                <div class="menu">
-                    <ul>
-                        <li>
-                            <a href="#"><i class='fas fa-home'></i> Home</a>
-                        </li>
-                        <li>
-                            <a href="/">Sport category</a>
-                            <ul class="sub-menu">
-                                <?php $category = run_query('select name from tblcategories where menu_id = 2', 'Error 404!');
-                                foreach ($category as $cat) {
-                                    ?>
-                                <li><a href="public/pages/category-pages.php" target="_blank" rel="noopener noreferrer"><?php echo $cat['name']; ?></a></li>
-                                <?php
-                                }
-                                ?>
-                            </ul>
-                        </li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="btn-next btn-slide-style">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="btn-prev btn-slide-style">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <div class="slide-box">
-                    <img src="public/assets/images/photos-news/1.JPG" alt="">
-                    <div class="titles">
-                        <p>
-                            <span class="title">
-                                Hello bang bang! Lorem, ipsum dolor sit amet consectetur adipisicing
-                                elit. Cumque, nisi!
-                            </span><br>
-                            <span class="short-desc">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-                                voluptas molestiae sapiente tempora nihil dolorum eius atque sequi. Sed,
-                                repellat?
-                            </span>
-                        </p>
-                    </div>
-                    <div class="category">
-                        Football
-                    </div>
-                    <div class="slide-link">
-                        <a href="#1" class="btn btn-warning btn-link">Read more ></a>
-                    </div>
-                </div>
-                <div class="slide-box">
-                    <img src="https://images.indianexpress.com/2019/08/ronaldo-759-1.jpg?w=565" alt="">
-                    <div class="title">
-                        This is my sister. She is 22ys.
-                    </div>
-                    <div class="category">
-                        Volleyball
-                    </div>
-                    <div class="slide-link">
-                        <a href="#2" class="btn btn-warning btn-link">Read more ></a>
-                    </div>
-                </div>
-                <div class="slide-box">
-                    <img src="https://www.popular.com.kh/wp-content/uploads/2019/06/feature_niboth_03.01.19_01-2.jpg" alt="">
-                    <div class="title">
-                        This is my sister. She is 22ys.
-                    </div>
-                    <div class="category">
-                        Tennis
-                    </div>
-                    <div class="slide-link">
-                        <a href="#3" class="btn btn-warning btn-link">Read more ></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="col-sm-slide">
-
-    </section>
-    <section id="pages-news">
-        <div class="row">
-            <div class="col-lg-2">
-
-            </div>
-            <div class="col-lg-8">
-                <div class="divide"></div>
-                <div class="content-pages wrapper-page">
-                    <div class="content-wrapper">
-                        <div class="content-bar">
-                            <!-- <div class="row">
-                        <div class="col-lg-1">
-                            <div class="corner-left"></div>
-                        </div>
-                        <div class="col-lg-10"> -->
-                            <div class="middle-bar">
-                                <h3>Content</h3>
-                            </div>
-                            <!-- <div class="col-lg-1">
-                                <div class="corner-left"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="corner-right"></div> -->
-                        </div>
-                        <div class="content-pages-wrapper">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card-page">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card-page">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-                                                <p>
-                                                    <span class="title">
-                                                        Hello bang bang! Lorem, ipsum dolor sit amet consectetur adipisicing
-                                                        elit. Cumque, nisi!
-                                                    </span><br>
-                                                    <span class="short-desc">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-                                                        voluptas molestiae sapiente tempora nihil dolorum eius atque sequi. Sed,
-                                                        repellat?
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="card-page-sm">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4"></div>
-                                <div class="col-lg-4">
-                                    <div class="card-page-sm">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="divide"></div>
-                <div class="content-pages wrapper-page">
-                    <div class="content-wrapper">
-                        <div class="content-bar">
-                            <!-- <div class="row">
-                        <div class="col-lg-1">
-                            <div class="corner-left"></div>
-                        </div>
-                        <div class="col-lg-10"> -->
-                            <div class="middle-bar">
-                                <h3>Content</h3>
-                            </div>
-                            <!-- <div class="col-lg-1">
-                                <div class="corner-left"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="corner-right"></div> -->
-                        </div>
-                        <div class="content-pages-wrapper">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card-page">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card-page">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="time">
-                                                <p>
-                                                    <span class="time"> </span>
-                                                </p>
-                                            </div>
-                                            <div class="card-content">
-                                                <p>
-                                                    <span class="title">
-                                                        Hello bang bang! Lorem, ipsum dolor sit amet consectetur adipisicing
-                                                        elit. Cumque, nisi!
-                                                    </span><br>
-                                                    <span class="short-desc">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-                                                        voluptas molestiae sapiente tempora nihil dolorum eius atque sequi. Sed,
-                                                        repellat?
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="card-page-sm">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card-page-sm">
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card-page-sm">
-                                        <div class="card-wrapper">
-                                            <div class="card-img">
-
-                                            </div>
-                                            <div class="card-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="divide"></div>
-            </div>
-            <div class="col-lg-2">
-
-            </div>
-        </div>
-    </section>
-    <?php include 'public/template/footer.php'; ?>
+        </section>
+        <!-- End latest-post Area -->
+    </div>
+    <?php include 'public/template/p-footer.php'; ?>

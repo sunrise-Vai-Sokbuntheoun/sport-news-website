@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <?php get_link(); ?>
+    <?php mdb_link(); ?>
 
     <title>Document</title>
 </head>
